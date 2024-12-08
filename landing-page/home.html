@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery Store</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            padding-top: 120px;
+        }
+        .logo-img {
+            width: 80px;
+            border-radius: 50%;
+        }
+        .logo-img1 {
+            width: 50px;
+        }
+        .header {
+            color: white;
+            padding: 0 5% 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: chartreuse;
+            height: 100px;
+        }
+        .main-heading {
+            width: 400px;
+            margin-left: -20%;
+            text-align: center;
+        }
+        .comp {
+            display: flex;
+            align-items: center;
+        }
+        .comp div {
+            margin: 0 20px;
+        }
+        .count {
+            color: black;
+            position: absolute;
+            top: 22%;
+            left: 50%;
+        }
+        .cart {
+            position: relative;
+        }
+        .web-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(191, 225, 255);
+            width: 100%;
+            height: 100%;
+            margin-bottom : 20px;
+        }
+        .line {
+            width: 200px;
+            height: 2px;
+            background-color: rgb(255, 255, 255);
+            transition: background-color 0.3s ease;
+        }
+        .slide {
+            background-color: rgb(0, 255, 55);
+        }
+        .web-body h2 {
+            background: linear-gradient(to right, rgb(24, 129, 0), rgb(55, 255, 0));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .web-body h2:hover {
+            background: linear-gradient(to right, rgb(255, 255, 255), rgb(176, 255, 155));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .plants {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            margin: 0 10%;
+            column-gap: 20px;
+            row-gap: 20px;
+            
+        }
+        .plant-img {
+            width: 200px;
+            height: 300px;
+        }
+        .item-container {
+            border-radius: 10px;;
+            background-color: rgb(197, 249, 223);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding:20px 2px;
+        }
+        .cart-but {
+            background-color: rgb(58, 255, 58);
+            padding: 10px 20px;
+            border-style: none;
+            border-radius: 5px;
+            box-shadow: inset 0px -4px 6px rgba(0, 0, 0, 0.9);
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-size: 20px;
+            color: rgb(0, 44, 0);
+            cursor: pointer;
+        }
+        .sales {
+            background-color: red;
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: white;
+            font-weight: 900;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="comp">
+            <div class="logo"><img src="landing-page/logo.jpg" alt="img" class="logo-img"></div>
+            <div style="color:white">
+                <h1>Family Grocery</h1>
+                <h4>Meet all your requirements at one place</h4>
+            </div>
+        </div>
+        <h1 class="main-heading">Plants</h1>
+        <div class="cart">
+            <img src="landing-page/shopping-cart.png" alt="img" class="logo-img1">
+            <div class="count">0</div>
+        </div>
+    </div>
+
+    <div class="web-body">
+        <div class="line"></div>
+        <h2 onmouseover="moveFromLeft()" onmouseout="revertEffect()">Air Purifing Plants</h2>
+        <div class="line"></div>
+    </div>
+    <div class="plants">
+        <div class="item-container">
+            <img src="landing-page/logo.jpg" alt="img" class="plant-img">
+            <p>$ 10</p>
+            <p class="plant-des">name,usage</p>
+            <div class="cart-but" onclick="addCart(this,10)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+
+        <div class="item-container">
+            <img src="landing-page/logo.jpg" alt="img" class="plant-img">
+            <p class="plant-des">This is a plant that you can buy</p>
+            <div class="cart-but" onclick="addCart(this,10)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+
+        <div class="item-container">
+            <img src="landing-page/logo.jpg" alt="img" class="plant-img">
+            <p class="plant-des">This is a plant that you can buy</p>
+            <div class="cart-but" onclick="addCart(this,10)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+
+
+        <div class="item-container">
+            <img src="landing-page/logo.jpg" alt="img" class="plant-img">
+            <p>$ 10</p>
+            <p class="plant-des">name,usage</p>
+            <div class="cart-but" onclick="addCart(this,10)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+
+        <div class="item-container">
+            <img src="landing-page/logo.jpg" alt="img" class="plant-img">
+            <p class="plant-des">This is a plant that you can buy</p>
+            <div class="cart-but" onclick="addCart(this,10)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+
+        <div class="item-container">
+            <img src="landing-page/logo.jpg" alt="img" class="plant-img">
+            <p class="plant-des">This is a plant that you can buy</p>
+            <div class="cart-but" onclick="addCart(this,10)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+
+
+
+    </div>
+
+    <script>
+        function moveFromLeft() {
+            let lines = document.querySelectorAll('.line');
+            lines.forEach(line => line.classList.add('slide'));
+        }
+
+        function revertEffect() {
+            let lines = document.querySelectorAll('.line');
+            lines.forEach(line => line.classList.remove('slide'));
+        }
+
+        function addCart(button,num) {
+            console.log(button.innerHTML)
+            if (button.innerHTML === "ADD TO CART") {
+                button.innerHTML = "ADDED TO CART";
+                button.style.backgroundColor = "grey"; // Optionally change the button color
+                let countElem = document.querySelector('.count');
+                countElem.innerHTML = +countElem.innerHTML + 1; // Increment the cart count
+            }
+            else {
+                button.innerHTML = "ADD TO CART";
+                button.style.backgroundColor = "#3AFF3A"; // Optionally change the button color
+                let countElem = document.querySelector('.count');
+                countElem.innerHTML = +countElem.innerHTML - 1;
+            }
+        }
+    </script>
+</body>
+</html>

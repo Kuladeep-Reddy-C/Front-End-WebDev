@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery Store</title>
+    <link rel="icon" href="landing-page/logo.jpg" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            padding-top: 120px;
+        }
+        .logo-img {
+            width: 80px;
+            border-radius: 50%;
+        }
+        .logo-img1 {
+            width: 50px;
+        }
+        .header {
+            color: white;
+            padding: 0 5% 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: chartreuse;
+            height: 100px;
+        }
+        .main-heading {
+            width: 400px;
+            margin-left: -20%;
+            text-align: center;
+        }
+        .comp {
+            display: flex;
+            align-items: center;
+        }
+        .comp div {
+            margin: 0 20px;
+        }
+        .count {
+            color: black;
+            position: absolute;
+            top: 22%;
+            left: 40%;
+        }
+        .cart {
+            position: relative;
+        }
+        .web-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url("banner.jpg");
+            background-position: bottom;
+            width: 100%;
+            height: 100%;
+            margin-bottom : 20px;
+        }
+        .line {
+            width: 200px;
+            height: 2px;
+            background-color: rgb(255, 255, 255);
+            transition: background-color 0.3s ease;
+        }
+        .slide {
+            background-color: rgb(0, 255, 55);
+        }
+        .web-body h2 {
+            background: linear-gradient(to right, rgb(24, 129, 0), rgb(55, 255, 0));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .web-body h2:hover {
+            background: linear-gradient(to right, rgb(255, 255, 255), rgb(176, 255, 155));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .plants {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            margin: 0 5%;
+            column-gap: 20px;
+            row-gap: 20px;
+            margin-bottom:30px;
+        }
+        .plant-img {
+            width: 200px;
+            height: 250px;
+        }
+        .item-container {
+            border-radius: 10px;
+            background-color: rgb(197, 249, 223);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 2px;
+        }
+        .cart-but {
+            background-color: rgb(58, 255, 58);
+            padding: 10px 20px;
+            border-style: none;
+            border-radius: 5px;
+            box-shadow: inset 0px -4px 6px rgba(54, 56, 52, 0.9);
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-size: 20px;
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+        }
+        .sales {
+            background-color: red;
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: white;
+            font-weight: 900;
+        }
+        .plant-des
+        {
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-size : 24px;
+        }
+        .unit-price
+        {
+            font-size: 18px;
+            color: rgb(255, 97, 97);
+        }
+        .usage
+        {
+            font-style: italic;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            margin-top:-10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="comp">
+            <div class="logo"><img src="landing-page/logo.jpg" alt="img" class="logo-img"></div>
+            <div style="color:white">
+                <h1>Family Grocery</h1>
+                <h4>Meet all your requirements at one place</h4>
+            </div>
+        </div>
+        <h1 class="main-heading">Plants</h1>
+        <div class="cart" onclick="window.location.href='cart.html'">
+            <img src="landing-page/shopping-cart.png" alt="img" class="logo-img1">
+            <div class="count">0</div>
+        </div>
+    </div>
+    <div class="web-body">
+        <div class="line"></div>
+        <h2 onmouseover="moveFromLeft()" onmouseout="revertEffect()">Air Purifying Plants</h2>
+        <div class="line"></div>
+    </div>
+    <div class="plants">
+        <div class="item-container">
+            <p class="plant-des">Snake Plant</p>
+            <img src="landing-page/snakeplant.webp" alt="img" class="plant-img">
+            <p class="unit-price">$ 8</p>
+            <p class="plant-des usage">Air Purifying - Removes toxins.</p>
+            <div class="cart-but" data-item-id="item1" onclick="addCart(this, 8)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Spider Plant</p>
+            <img src="landing-page/nurserylive-g-chlorophytum-spider-plant-plant_6c3477e8-39ca-4d4b-b51a-1f9fb435ac17.jpg" alt="img" class="plant-img">
+            <p class="unit-price">$ 9</p>
+            <p class="plant-des usage">Air Purifying - Cleans indoor air.</p>
+            <div class="cart-but" data-item-id="item2" onclick="addCart(this, 9)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Peace Lily</p>
+            <img src="landing-page/SPR-variegated-peace-lily-domino-7097188-hero-A-422d7faa152d42d3a4030ff8a2a33768.webp" alt="img" class="plant-img">
+            <p class="unit-price">$ 10</p>
+            <p class="plant-des usage">Air Purifying - Absorbs pollutants.</p>
+            <div class="cart-but" data-item-id="item3" onclick="addCart(this, 10)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">English Ivy</p>
+            <img src="landing-page/English-Ivy-Variegated.jpg" alt="img" class="plant-img">
+            <p class="unit-price">$ 11</p>
+            <p class="plant-des usage">Air Purifying - Reduces mold.</p>
+            <div class="cart-but" data-item-id="item4" onclick="addCart(this, 11)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Aloe Vera</p>
+            <img src="landing-page/Aloe-Vera-Website-Front.webp" alt="img" class="plant-img">
+            <p class="unit-price">$ 12</p>
+            <p class="plant-des usage">Air Purifying - Releases oxygen at night.</p>
+            <div class="cart-but" data-item-id="item5" onclick="addCart(this, 12)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Bamboo Palm</p>
+            <img src="landing-page/bamboo-palm-plant-01-2.jpg" alt="img" class="plant-img">
+            <p class="unit-price">$ 13</p>
+            <p class="plant-des usage">Air Purifying - Filters air pollutants.</p>
+            <div class="cart-but" data-item-id="item6" onclick="addCart(this, 13)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+    </div>
+    
+    <div class="web-body">
+        <div class="line"></div>
+        <h2 onmouseover="moveFromLeft()" onmouseout="revertEffect()">Medicinal Plants</h2>
+        <div class="line"></div>
+    </div>
+    <div class="plants">
+        <div class="item-container">
+            <p class="plant-des">Aloe Vera</p>
+            <img src="landing-page/Aloe-Vera-Website-Front.webp" alt="img" class="plant-img">
+            <p class="unit-price">$ 8</p>
+            <p class="plant-des usage">Medicinal - Heals skin issues.</p>
+            <div class="cart-but" data-item-id="item7" onclick="addCart(this, 8)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Tulsi (Holy Basil)</p>
+            <img src="landing-page/tusli.jpg" alt="img" class="plant-img">
+            <p class="unit-price">$ 9</p>
+            <p class="plant-des usage">Medicinal - Boosts immunity.</p>
+            <div class="cart-but" data-item-id="item8" onclick="addCart(this, 9)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Mint</p>
+            <img src="landing-page/mint.jpeg" alt="img" class="plant-img">
+            <p class="unit-price">$ 10</p>
+            <p class="plant-des usage">Medicinal - Aids digestion.</p>
+            <div class="cart-but" data-item-id="item9" onclick="addCart(this, 10)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Lavender</p>
+            <img src="landing-page/Lavender.webp" alt="img" class="plant-img">
+            <p class="unit-price">$ 11</p>
+            <p class="plant-des usage">Medicinal - Reduces stress.</p>
+            <div class="cart-but" data-item-id="item10" onclick="addCart(this, 11)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Ginger</p>
+            <img src="landing-page/ginger plant.jpg" alt="img" class="plant-img">
+            <p class="unit-price">$ 12</p>
+            <p class="plant-des usage">Medicinal - Relieves nausea.</p>
+            <div class="cart-but" data-item-id="item11" onclick="addCart(this, 12)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Chamomile</p>
+            <img src="landing-page/Chamomile.webp" alt="img" class="plant-img">
+            <p class="unit-price">$ 13</p>
+            <p class="plant-des usage">Medicinal - Promotes sleep.</p>
+            <div class="cart-but" data-item-id="item12" onclick="addCart(this, 13)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+    </div>
+    <div class="web-body">
+        <div class="line"></div>
+        <h2 onmouseover="moveFromLeft()" onmouseout="revertEffect()">Ornamental Plants</h2>
+        <div class="line"></div>
+    </div>
+    <div class="plants">
+        <div class="item-container">
+            <p class="plant-des">Orchids</p>
+            <img src="landing-page/orchids.jpeg" alt="img" class="plant-img">
+            <p class="unit-price">$ 8</p>
+            <p class="plant-des usage">Ornamental - Beautiful flowers.</p>
+            <div class="cart-but" data-item-id="item13" onclick="addCart(this, 8)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Roses</p>
+            <img src="landing-page/roses.webp" alt="img" class="plant-img">
+            <p class="unit-price">$ 9</p>
+            <p class="plant-des usage">Ornamental - Fragrant blooms.</p>
+            <div class="cart-but" data-item-id="item14" onclick="addCart(this, 9)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Marigold</p>
+            <img src="landing-page/marigold.webp" alt="img" class="plant-img">
+            <p class="unit-price">$ 10</p>
+            <p class="plant-des usage">Ornamental - Bright flowers.</p>
+            <div class="cart-but" data-item-id="item15" onclick="addCart(this, 10)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Hibiscus</p>
+            <img src="landing-page/hibiscus.jpeg" alt="img" class="plant-img">
+            <p class="unit-price">$ 11</p>
+            <p class="plant-des usage">Ornamental - Large, colorful blooms.</p>
+            <div class="cart-but" data-item-id="item16" onclick="addCart(this, 11)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Bougainvillea</p>
+            <img src="landing-page/Bougainvillea.webp" alt="img" class="plant-img">
+            <p class="unit-price">$ 12</p>
+            <p class="plant-des usage">Ornamental - Vibrant colors.</p>
+            <div class="cart-but" data-item-id="item17" onclick="addCart(this, 12)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Tulips</p>
+            <img src="landing-page/tulips.jpg" alt="img" class="plant-img">
+            <p class="unit-price">$ 13</p>
+            <p class="plant-des usage">Ornamental - Spring blooms.</p>
+            <div class="cart-but" data-item-id="item18" onclick="addCart(this, 13)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+    </div>
+    
+    <div class="web-body">
+        <div class="line"></div>
+        <h2 onmouseover="moveFromLeft()" onmouseout="revertEffect()">Herbs for Cooking</h2>
+        <div class="line"></div>
+    </div>
+    <div class="plants">
+        <div class="item-container">
+            <p class="plant-des">Basil</p>
+            <img src="landing-page/Basil.webp" alt="img" class="plant-img">
+            <p class="unit-price">$ 8</p>
+            <p class="plant-des usage">Herb - Great for pesto.</p>
+            <div class="cart-but" data-item-id="item19" onclick="addCart(this, 8)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Thyme</p>
+            <img src="landing-page/Thyme.webp" alt="img" class="plant-img">
+            <p class="unit-price">$ 9</p>
+            <p class="plant-des usage">Herb - Versatile seasoning.</p>
+            <div class="cart-but" data-item-id="item20" onclick="addCart(this, 9)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Rosemary</p>
+            <img src="landing-page/Rosemary.jpg" alt="img" class="plant-img">
+            <p class="unit-price">$ 10</p>
+            <p class="plant-des usage">Herb - Excellent for roasts.</p>
+            <div class="cart-but" data-item-id="item21" onclick="addCart(this, 10)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Parsley</p>
+            <img src="landing-page/Parsley.webp" alt="img" class="plant-img">
+            <p class="unit-price">$ 11</p>
+            <p class="plant-des usage">Herb - Freshens dishes.</p>
+            <div class="cart-but" data-item-id="item22" onclick="addCart(this, 11)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Cilantro (Coriander)</p>
+            <img src="landing-page/Cilantro.jpg" alt="img" class="plant-img">
+            <p class="unit-price">$ 12</p>
+            <p class="plant-des usage">Herb - Perfect for salsa.</p>
+            <div class="cart-but" data-item-id="item23" onclick="addCart(this, 12)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Oregano</p>
+            <img src="landing-page/Oregano.jpg" alt="img" class="plant-img">
+            <p class="unit-price">$ 13</p>
+            <p class="plant-des usage">Herb - Ideal for pizzas.</p>
+            <div class="cart-but" data-item-id="item24" onclick="addCart(this, 13)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+    </div>
+    
+    <div class="web-body">
+        <div class="line"></div>
+        <h2 onmouseover="moveFromLeft()" onmouseout="revertEffect()">Succulents</h2>
+        <div class="line"></div>
+    </div>
+    <div class="plants">
+        <div class="item-container">
+            <p class="plant-des">Echeveria</p>
+            <img src="landing-page/Echeveria-Plant.webp" alt="img" class="plant-img">
+            <p class="unit-price">$ 8</p>
+            <p class="plant-des usage">Succulent - Low maintenance.</p>
+            <div class="cart-but" data-item-id="item25" onclick="addCart(this, 8)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Jade Plant</p>
+            <img src="landing-page/Jade-Plant.webp" alt="img" class="plant-img">
+            <p class="unit-price">$ 9</p>
+            <p class="plant-des usage">Succulent - Symbol of luck.</p>
+            <div class="cart-but" data-item-id="item26" onclick="addCart(this, 9)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Zebra Plant</p>
+            <img src="landing-page/Zebra-Plant.webp" alt="img" class="plant-img">
+            <p class="unit-price">$ 10</p>
+            <p class="plant-des usage">Succulent - Striking appearance.</p>
+            <div class="cart-but" data-item-id="item27" onclick="addCart(this, 10)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Sedum</p>
+            <img src="landing-page/Sedum.webp" alt="img" class="plant-img">
+            <p class="unit-price">$ 11</p>
+            <p class="plant-des usage">Succulent - Drought tolerant.</p>
+            <div class="cart-but" data-item-id="item28" onclick="addCart(this, 11)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Agave</p>
+            <img src="landing-page/Agave.jpg" alt="img" class="plant-img">
+            <p class="unit-price">$ 12</p>
+            <p class="plant-des usage">Succulent - Used for tequila.</p>
+            <div class="cart-but" data-item-id="item29" onclick="addCart(this, 12)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+        <div class="item-container">
+            <p class="plant-des">Aloe Vera</p>
+            <img src="landing-page/Aloe-Vera-Website-Front.webp" alt="img" class="plant-img">
+            <p class="unit-price">$ 12</p>
+            <p class="plant-des usage">Succulent - Medicinal uses.</p>
+            <div class="cart-but" data-item-id="item30" onclick="addCart(this, 12)">ADD TO CART</div>
+            <div class="sales">For Sale</div>
+        </div>
+    </div>
+    
+
+    <script>
+        let cart = [];
+
+        function moveFromLeft() {
+            let lines = document.querySelectorAll('.line');
+            lines.forEach(line => line.classList.add('slide'));
+        }
+
+        function revertEffect() {
+            let lines = document.querySelectorAll('.line');
+            lines.forEach(line => line.classList.remove('slide'));
+        }
+
+        function addCart(button, price) {
+            if (button.innerHTML === "ADD TO CART") {
+                button.innerHTML = "ADDED TO CART";
+                button.style.backgroundColor = "grey"; // Optionally change the button color
+
+                let itemContainer = button.parentElement;
+                let itemImage = itemContainer.querySelector('.plant-img').src;
+                let itemDescription = itemContainer.querySelector('.plant-des').innerText;
+                let itemId = button.dataset.itemId;
+
+                const existingItem = cart.find(item => item.id === itemId);
+
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({ id: itemId, image: itemImage, description: itemDescription, price: price, quantity: 1 });
+                }
+
+                updateCartCount();
+                saveCart();
+            }
+        }
+
+        function updateCartCount() {
+            let countElem = document.querySelector('.count');
+            countElem.innerHTML = cart.reduce((total, item) => total + item.quantity, 0);
+        }
+
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            // Dispatch an event to notify the home page
+            const event = new CustomEvent('cartUpdated');
+            window.dispatchEvent(event);
+        }
+
+        function loadCart() {
+            cart = JSON.parse(localStorage.getItem('cart')) || [];
+            updateCartCount();
+            updateButtonState();
+        }
+
+        function updateButtonState() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.querySelectorAll('.cart-but').forEach(button => {
+                const itemId = button.dataset.itemId;
+                const itemInCart = cart.find(item => item.id === itemId);
+                if (itemInCart && itemInCart.quantity > 0) {
+                    button.textContent = 'ADDED TO CART';
+                    button.style.backgroundColor = 'grey'; // Optionally change the button color
+                    button.disabled = true; // Optionally disable the button
+                } else {
+                    button.textContent = 'ADD TO CART';
+                    button.style.backgroundColor = ''; // Reset to original style
+                    button.disabled = false;
+                }
+            });
+        }
+
+        window.addEventListener('cartUpdated', updateButtonState);
+
+        window.onload = loadCart;
+    </script>
+</body>
+</html>

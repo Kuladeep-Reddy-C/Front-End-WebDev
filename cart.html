@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="icon" href="landing-page/logo.jpg" type="image/x-icon">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 20px;
+        }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            padding-top: 120px;
+        }
+        .logo-img {
+            width: 80px;
+            border-radius: 50%;
+        }
+        .logo-img1 {
+            width: 50px;
+        }
+        .header {
+            color: white;
+            padding: 0 5% 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: chartreuse;
+            height: 100px;
+        }
+        .main-heading {
+            width: 400px;
+            margin-left: -20%;
+            text-align: center;
+        }
+        .comp {
+            display: flex;
+            align-items: center;
+        }
+        .comp div {
+            margin: 0 20px;
+        }
+        .count {
+            color: black;
+            position: absolute;
+            top: 22%;
+            left: 50%;
+        }
+        .cart {
+            position: relative;
+        }
+        .cart-container {
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 50%;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .cart-item img {
+            width: 200px;
+            height: auto;
+        }
+        .cart-item-details {
+            flex-grow: 1;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items:start;
+            justify-content: space-between;
+        }
+        .cart-item-quantity {
+            display: flex;
+            align-items:center;
+            /* justify-content: space-around; */
+        }
+        .cart-item-quantity button {
+            background-color: #15ff00;
+            color: white;
+            border-radius: 5px;
+            font-weight: 900;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+            margin: 0 5px;
+        }
+        .cart-item-remove {
+            font-weight: 700;
+            border-radius: 5px;
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        .total-cost {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .final-buttons
+        {
+            margin-top:100px;
+            padding: 15px 20px;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            background-color: rgb(64, 255, 54);
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            text-decoration: none;
+        }
+        .name, .name1
+        {
+            font-weight: 700;
+            font-size: 14px;
+            
+        }
+        .name1{
+            font-weight: 900;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div onclick="navToHome()" class="comp">
+            <div class="logo"><img src="landing-page/logo.jpg" alt="img" class="logo-img"></div>
+            <div style="color:white">
+                <h1>Family Grocery</h1>
+                <h4>Meet all your requirements at one place</h4>
+            </div>
+        </div>
+        <h1 class="main-heading">Plants</h1>
+        <div class="cart" onclick="window.location.href='cart.html'">
+            <img src="landing-page/shopping-cart.png" alt="img" class="logo-img1">
+            <div class="count">0</div>
+        </div>
+    </div>
+
+    <h1>Your Cart</h1>
+    <div class="cart-container" id="cart-container">
+        <!-- Cart items will be displayed here -->
+    </div>
+    <div class="total-cost" id="total-cost">Total Cost: $0</div>
+
+
+    <a class="final-buttons" href="newhome3.html">Continue Shopping</a>
+    <button class="final-buttons">Checkout</button>
+
+    <script>
+
+    function navToHome() 
+    {
+        window.location.href = "newhome3.html";
+    }
+        let cart = [];
+
+        function addCart(button, price) {
+            if (button.innerHTML === "ADD TO CART") {
+                button.innerHTML = "ADDED TO CART";
+                button.style.backgroundColor = "grey"; // Optionally change the button color
+
+                let itemContainer = button.parentElement;
+                let itemImage = itemContainer.querySelector('.plant-img').src;
+                let itemDescription = itemContainer.querySelector('.plant-des').innerText;
+                let itemId = button.dataset.itemId;
+
+                const existingItem = cart.find(item => item.id === itemId);
+
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({ id: itemId, image: itemImage, description: itemDescription, price: price, quantity: 1 });
+                }
+
+                updateCartCount();
+                saveCart();
+                displayCartItems();
+            }
+        }
+
+        function updateCartCount() {
+            let countElem = document.querySelector('.count');
+            countElem.innerHTML = cart.reduce((total, item) => total + item.quantity, 0);
+        }
+
+        function loadCart() {
+            cart = JSON.parse(localStorage.getItem('cart')) || [];
+            updateCartCount();
+            displayCartItems();
+        }
+
+        function displayCartItems() {
+            const cartContainer = document.getElementById('cart-container');
+            cartContainer.innerHTML = '';
+
+            cart.forEach((item, index) => {
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('cart-item');
+
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="img">
+                    <div class="cart-item-details">
+                        <h3 class="name1">${item.description}</h3>
+                        <p class="name">Unit Price: $${item.price}</p>
+                        <p class="name">Total Price: $${(item.price * item.quantity).toFixed(2)}</p>
+                    </div>
+                    <div class="cart-item-quantity">
+                        <button onclick="changeQuantity(${index}, -1)">-</button>
+                        <span>${item.quantity}</span>
+                        <button onclick="changeQuantity(${index}, 1)">+</button>
+                    </div>
+                    <button class="cart-item-remove" onclick="removeItem(${index})">Remove</button>
+                `;
+
+                cartContainer.appendChild(cartItem);
+            });
+
+            updateTotalCost();
+        }
+
+        function changeQuantity(index, delta) {
+            cart[index].quantity += delta;
+            if (cart[index].quantity <= 0) {     
+                cart.splice(index, 1);
+            }
+            saveCart();
+            displayCartItems();
+            updateCartCount();
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            saveCart();
+            displayCartItems();
+            updateCartCount();
+        }
+
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        function updateTotalCost() {
+            const totalCost = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            document.getElementById('total-cost').innerText = `Total Cost: $${totalCost.toFixed(2)}`;
+        }
+
+        window.onload = loadCart;
+    </script>
+</body>
+</html>
